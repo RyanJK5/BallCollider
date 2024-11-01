@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:BouncingBall.Views"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:Class="BouncingBall.Views.InitialRulesPage"
+            BackgroundColor="Black">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GraphicsView x:Name="BallView"
+                      HeightRequest="300"
+                      WidthRequest="350" />
+
+        <Button x:Name="RestartButton" 
+                Grid.Row="1"
+                Pressed="RestartButton_Pressed"
+                WidthRequest="80"
+                HeightRequest="50"
+                Padding="0"
+                Margin="0,0,0,5"
+                LineBreakMode="CharacterWrap"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                BackgroundColor="Gray"
+                Text="Restart Simulation" 
+        />
+        <Button x:Name="ResetAll"
+                Grid.Row="1"
+                Pressed="ResetAll_Pressed"
+                WidthRequest="80"
+                HeightRequest="50"
+                VerticalOptions="End"
+                Padding="0"
+                Margin="0,0,0,5"
+                LineBreakMode="CharacterWrap"
+                HorizontalOptions="Start"
+                BackgroundColor="Gray"
+                Text="Reset To Default" />
+
+        <ScrollView Grid.Row="2">
+            <Grid BackgroundColor="#302c2c" Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ListView RowHeight="80"
+                          x:Name="SliderControls"
+                          SelectionMode="None"
+                          WidthRequest="360"
+                          SeparatorVisibility="None"
+                          VerticalScrollBarVisibility="Never" >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180" />
+                                        <ColumnDefinition Width="180" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.ColumnSpan="2"
+                                           Text="{Binding Name}"
+                                           HorizontalOptions="Center" />
+                                    <Slider Grid.ColumnSpan="2"
+                                            Maximum="{Binding Maximum}"
+                                            Minimum="{Binding Minimum}"
+                                            Value="{Binding Value}"
+                                            x:Name="RuleSlider"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="325"
+                                            HeightRequest="80"
+                                            Loaded="RuleSlider_Loaded"
+                                            Margin="-10"
+                                            MinimumTrackColor="White"
+                                            MaximumTrackColor="Black"
+                                            Scale="1" />
+                                    <Label  Grid.ColumnSpan="2"
+                                            Text="{Binding Source={x:Reference RuleSlider},
+                                            Path=Value,
+                                            StringFormat='{0:F0}' }"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="End"
+                                            Margin="0,0,0,8" />
+                                    <Button Grid.Column="2"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="End"
+                                            HeightRequest="20"
+                                            WidthRequest="50"
+                                            Text="Reset"
+                                            Padding="0"
+                                            Margin="0,0,35,10"
+                                            FontSize="12"
+                                            TextColor="Black"
+                                            BackgroundColor="Gray"
+                                            Command="{Binding ResetToDefault}"
+                                            CommandParameter="{x:Reference RuleSlider}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView Grid.Row="2"
+                          x:Name="SwitchControls"
+                          SelectionMode="None"
+                          WidthRequest="360"
+                          SeparatorVisibility="None" >
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <HorizontalStackLayout>
+                                    <Switch IsToggled="{Binding IsToggled}"
+                                            VerticalOptions="Center"
+                                            IsEnabled="{Binding IsEnabled}"
+                                            Margin="5,0,5,0"
+                                            Loaded="Switch_Loaded"/>
+                                    <Label Text="{Binding Name}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:BouncingBall.Views"
+            x:Class="BouncingBall.Views.MainPage"
+            BarBackgroundColor="#302c2c"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            SelectedTabColor="White"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.IsSmoothScrollEnabled="false"
+            android:TabbedPage.IsSwipePagingEnabled="False"
+            >
+
+    <local:InitialRulesPage Title="Initial"/>
+    <local:DynamicRulesPage Title="Dynamic"/>
+    <local:DrawRulesPage Title="Graphics"/>
+    <local:AudioPage Title="Audio"/>
+</TabbedPage>

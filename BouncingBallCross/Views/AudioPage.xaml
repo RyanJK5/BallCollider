@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BouncingBall.Views"
+             x:Class="BouncingBall.Views.AudioPage"
+             BackgroundColor="Black"
+             Title="AudioPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GraphicsView x:Name="BallView"
+                  HeightRequest="300"
+                  WidthRequest="350" />
+
+        <Button x:Name="ResetAll"
+                Grid.Row="1"
+                Pressed="ResetAll_Pressed"
+                WidthRequest="80"
+                HeightRequest="50"
+                VerticalOptions="End"
+                Padding="0"
+                Margin="0,0,0,5"
+                LineBreakMode="CharacterWrap"
+                HorizontalOptions="Start"
+                BackgroundColor="Gray"
+                Text="Reset To Default" 
+        />
+        <Button x:Name="RestartButton" 
+                Grid.Row="1"
+                Pressed="RestartButton_Pressed"
+                WidthRequest="80"
+                HeightRequest="50"
+                Padding="0"
+                Margin="0,0,0,5"
+                LineBreakMode="CharacterWrap"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                BackgroundColor="Gray"
+                Text="Restart Simulation" 
+        />
+
+        <ScrollView Grid.Row="2">
+            <Grid x:Name="AudioControls"
+                  WidthRequest="360"
+                  BackgroundColor="#302c2c" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <RadioButton x:Name="AudioSet"
+                             Content="Audio Set"
+                             Padding="10"
+                             GroupName="AudioType"
+                             CheckedChanged="CheckedChanged"
+                             Margin="5,3,0,0"/>
+                <RadioButton x:Name="CustomAudio"
+                             Content="Upload Sound"
+                             Padding="10"
+                             GroupName="AudioType"
+                             CheckedChanged="CheckedChanged"
+                             Grid.Row="1"
+                             Margin="5,3,0,0"/>
+                <RadioButton x:Name="CustomSong"
+                             Content="Upload MIDI Song"
+                             Padding="10"
+                             GroupName="AudioType"
+                             CheckedChanged="CheckedChanged"
+                             Grid.Row="2"
+                             Margin="5,3,0,0"/>
+
+                <Picker VerticalOptions="Start"
+                        HorizontalOptions="Start"
+                        Grid.Column="1"
+                        Title="Audio Set"
+                        x:Name="AudioTypeSelectors"
+                        SelectedItem="{Binding AudioSet}"
+                        IsVisible="{Binding Source={x:Reference AudioSet}, Path=IsChecked}"
+                        WidthRequest="150" />
+                <Border Grid.Row="1"
+                        Grid.Column="1"
+                        WidthRequest="190"
+                        HorizontalOptions="Start"
+                        HeightRequest="30"
+                        Stroke="White"
+                        IsVisible="{Binding Source={x:Reference CustomAudio}, Path=IsChecked}" >
+                    <HorizontalStackLayout>
+                        <Label  x:Name="AudioFileName"
+                                Padding="5"
+                                HeightRequest="30"
+                                LineBreakMode="HeadTruncation"
+                                VerticalTextAlignment="Center"
+                                BackgroundColor="DimGray"
+                                TextColor="Black"
+                                WidthRequest="150" />
+                        <Button Text="..."
+                                Padding="0"
+                                BackgroundColor="Gray"
+                                WidthRequest="40"
+                                HeightRequest="30"
+                                CornerRadius="0"
+                                Pressed="SoundButton_Pressed" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Border Grid.Row="2"
+                        Grid.Column="1"
+                        WidthRequest="190"
+                        HorizontalOptions="Start"
+                        HeightRequest="30"
+                        Stroke="White"
+                        IsVisible="{Binding Source={x:Reference CustomSong}, Path=IsChecked}" >
+                    <HorizontalStackLayout>
+                        <Label  x:Name="SongFileName"
+                                Padding="5"
+                                HeightRequest="30"
+                                LineBreakMode="HeadTruncation"
+                                VerticalTextAlignment="Center"
+                                BackgroundColor="DimGray"
+                                TextColor="Black"
+                                WidthRequest="150" />
+                        <Button Text="..."
+                                Padding="0"
+                                BackgroundColor="Gray"
+                                WidthRequest="40"
+                                HeightRequest="30"
+                                CornerRadius="0"
+                                Pressed="SongButton_Pressed" />
+                    </HorizontalStackLayout>
+                </Border>
+
+
+
+                <Label Text="Activation"
+                       Margin="13,10,0,0"
+                       Grid.Row="3" />
+
+                <HorizontalStackLayout Grid.Row="4">
+                    <CheckBox x:Name="OnWallBox"
+                              IsChecked="{Binding AudioOnOuter}"/>
+                    <Label Text="Ball On Wall"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="5">
+                    <CheckBox x:Name="OnBallBox"
+                              IsChecked="{Binding AudioOnInner}"/>
+                    <Label Text="Ball On Ball"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
