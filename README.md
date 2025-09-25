@@ -7,3 +7,7 @@ Top features include:
 - Change the appearance of each ball to make the most visually exciting simulation possible.
 - Upload custom audio or use built-in audio sets to make the balls play songs, musical notes, or funny noises!
 - Watch how your decisions make the simulation morph over time, and see if it will reach equilibrium or devolve into total chaos!
+
+# Download
+Though Ball Collider is not yet officialy published on the Google Play Store, the APK can be downloaded from the link below:
+https://drive.google.com/file/d/1yHwvRg7jltCp2ekmwcYuaxoB-x2aCmP4/view
